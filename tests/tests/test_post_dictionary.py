@@ -16,7 +16,7 @@ def test_post_dictionary(delete_item, get_json_schema):
     validate(response_body, get_json_schema)
 
 
-def test_existing_item():
+def test_post_existing_item():
     response = requests.post(host + path_dictionary,
                              json=valid_dict)
 
@@ -25,7 +25,7 @@ def test_existing_item():
 
 
 @pytest.mark.parametrize("invalid_body", invalid_dicts)
-def test_invalid_body(invalid_body):
+def test_post_invalid_body(invalid_body):
     response = requests.post(host + path_dictionary,
                              json=invalid_body)
 

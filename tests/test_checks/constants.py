@@ -9,3 +9,4 @@ class ResponseBody:
     VALUE_NOT_FOUND = "Value not found :("
     RECORD_EXISTS = "Record with key '{key}' already exists"
     BODY_FORMAT_INVALID = "body format is invalid"
+    RECORD_NOT_FOUND = "Record with key '{key}' not found"
