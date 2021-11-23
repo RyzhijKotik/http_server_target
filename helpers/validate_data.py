@@ -1,6 +1,8 @@
 from jsonschema import validate, exceptions
 from helpers.get_data import get_json
 
+path_to_data = "../data/"
+
 
 def record_exists(key):
     for item in get_json():
@@ -10,24 +12,8 @@ def record_exists(key):
 
 
 def json_validate(body):
-    schema = {
-        "type": "object",
-        "required": [
-            "key",
-            "value"
-        ],
-        "properties": {
-            "key": {
-                "type": "string"
-            },
-            "value": {
-                "type": "string"
-            }
-        },
-        "additionalProperties": False
-    }
     try:
-        validate(body, schema)
+        validate(body, get_json(path=f"{path_to_data}data_schema.json"))
         return True
     except (exceptions.ValidationError, exceptions.SchemaError):
         return False

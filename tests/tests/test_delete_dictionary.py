@@ -1,9 +1,9 @@
 import requests
 import pytest
 from jsonschema import validate
-from helpers.json_schema import get_json_schema
+from helpers.get_data import get_json
 from tests.test_data.request_data import URL, InvalidRequestData
-from tests.test_checks.constants import ResponseStatus
+from tests.test_checks.constants import ResponseStatus, path_to_json_schemas
 
 
 def test_delete_dictionary(key_to_delete):
@@ -11,7 +11,7 @@ def test_delete_dictionary(key_to_delete):
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
-    validate(response_body, get_json_schema("empty_result.json"))
+    validate(response_body, get_json(path=f"{path_to_json_schemas}empty_result.json"))
     assert response_body["result"] is None
 
 
@@ -21,6 +21,6 @@ def test_delete_invalid_keys(invalid_key):
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
-    validate(response_body, get_json_schema("empty_result.json"))
+    validate(response_body, get_json(path=f"{path_to_json_schemas}empty_result.json"))
     assert response_body["result"] is None
 

@@ -1,9 +1,9 @@
 import requests
 import pytest
 from tests.test_data.request_data import URL, RequestData, InvalidRequestData
-from helpers.json_schema import get_json_schema
+from helpers.get_data import get_json
 from jsonschema import validate
-from tests.test_checks.constants import ResponseStatus, ResponseBody
+from tests.test_checks.constants import ResponseStatus, ResponseBody, path_to_json_schemas
 
 
 def test_post_dictionary(key_not_existing):
@@ -13,7 +13,7 @@ def test_post_dictionary(key_not_existing):
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
-    validate(response_body, get_json_schema("default_schema.json"))
+    validate(response_body, get_json(path=f"{path_to_json_schemas}default_schema.json"))
     assert response_body["result"] == body['value']
 
 

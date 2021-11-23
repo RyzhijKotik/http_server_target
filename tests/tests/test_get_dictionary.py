@@ -1,18 +1,19 @@
 import requests
 from tests.test_data.request_data import URL, RequestData
-from helpers.json_schema import get_json_schema
+from helpers.get_data import get_json
 from jsonschema import validate
-from tests.test_checks.constants import ResponseStatus, ResponseBody
+from tests.test_checks.constants import ResponseStatus, ResponseBody, path_to_json_schemas
 
 
 def test_get_dictionary():
+    request_dict = RequestData.valid_dict
     response = requests.get(URL.host + URL.path_dictionary_key
-                                          .format(key=RequestData.valid_dict['key']))
+                                          .format(key=request_dict['key']))
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
-    validate(response_body, get_json_schema("default_schema.json"))
-    assert response_body["result"] == RequestData.valid_dict['value']
+    validate(response_body, get_json(path=f"{path_to_json_schemas}default_schema.json"))
+    assert response_body["result"] == request_dict['value']
 
 
 def test_with_invalid_key(key_not_existing):
