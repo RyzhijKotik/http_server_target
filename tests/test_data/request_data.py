@@ -17,6 +17,10 @@ invalid_dicts = [None,
                  {"key": "100500"}, {"value": "too_many_fields"}, {"another_field": "error"}]
 
 
+invalid_keys = [None,
+                "key_that_not_exists"]
+
+
 def generate_item(key):
     return {"key": key, "value": f"value for key {key}"}
 
