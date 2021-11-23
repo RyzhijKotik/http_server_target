@@ -8,7 +8,7 @@ class URL:
 
 
 class RequestData:
-    path_to_data = "data\data_json.json"
+    path_to_data = "data/data_json.json"
     valid_dict = get_json(path=path_to_data)[0]
 
     @staticmethod
