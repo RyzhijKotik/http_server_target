@@ -1,19 +1,20 @@
 import requests
 import pytest
 from tests.test_data.request_data import host, path_dictionary, generate_item, valid_dict, invalid_dicts
+from helpers.json_schema import get_json_schema
 from jsonschema import validate
 from tests.test_checks.constants import ResponseStatus, ResponseBody
 
 
-def test_post_dictionary(delete_item, get_json_schema):
-    body = generate_item(delete_item)
+def test_post_dictionary(key_not_existing):
+    body = generate_item(key_not_existing)
     response = requests.post(host + path_dictionary,
                              json=body)
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
+    validate(response_body, get_json_schema("default_schema.json"))
     assert response_body["result"] == body['value']
-    validate(response_body, get_json_schema)
 
 
 def test_post_existing_item():

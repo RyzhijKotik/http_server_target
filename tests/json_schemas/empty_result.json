@@ -1,0 +1,16 @@
+{
+    "type": "object",
+    "required": [
+        "result",
+        "time"
+    ],
+    "properties": {
+        "result": {
+            "type": "null"
+        },
+        "time": {
+            "type": "string"
+        }
+    },
+    "additionalProperties": false
+}

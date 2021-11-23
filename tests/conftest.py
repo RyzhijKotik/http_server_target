@@ -1,18 +1,20 @@
-import json
 import pytest
 from tests.test_data.request_data import host, path_dictionary, path_dictionary_key, valid_dict, generate_item
 import requests
 
 
 @pytest.fixture()
-def get_json_schema():
-    with open("tests/test_checks/response_schema.json") as f:
-        return json.load(f)
+def key_to_delete():
+    key = valid_dict['key']
+    yield key
+    requests.post(host + path_dictionary, json=generate_item(key))
 
 
 @pytest.fixture()
-def delete_item():
-    key_to_delete = valid_dict['key']
-    requests.delete(host + path_dictionary_key.format(key=key_to_delete))
-    yield key_to_delete
-    requests.post(host + path_dictionary, json=generate_item(key_to_delete))
+def key_not_existing():
+    key = valid_dict['key']
+    requests.delete(host + path_dictionary_key.format(key=key))
+    yield key
+    requests.post(host + path_dictionary, json=generate_item(key))
+
+

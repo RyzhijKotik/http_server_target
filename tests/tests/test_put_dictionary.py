@@ -1,24 +1,25 @@
 import requests
 import pytest
 from tests.test_data.request_data import host, path_dictionary_key, generate_item, valid_dict, invalid_dicts
+from helpers.json_schema import get_json_schema
 from jsonschema import validate
 from tests.test_checks.constants import ResponseStatus, ResponseBody
 from copy import deepcopy
 
 
-def test_put_dictionary(get_json_schema):
+def test_put_dictionary():
     new_dict = deepcopy(valid_dict)
     new_dict["value"] = f"new {valid_dict['value']}"
     response = requests.put(host + path_dictionary_key, json=new_dict)
 
     assert response.status_code == ResponseStatus.OK
     response_body = response.json()
+    validate(response_body, get_json_schema("default_schema.json"))
     assert response_body["result"] == new_dict["value"]
-    validate(response_body, get_json_schema)
 
 
-def test_put_not_existing_item(delete_item):
-    body = generate_item(delete_item)
+def test_put_not_existing_item(key_not_existing):
+    body = generate_item(key_not_existing)
     response = requests.put(host + path_dictionary_key,
                              json=body)
 
