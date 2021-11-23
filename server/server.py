@@ -1,6 +1,6 @@
 from flask import Flask, request, make_response
-from helpers.data_modificaton import append_data, update_data, delete_data
-from helpers.data_validation import json_validate, record_exists
+from helpers.modify_data import append_data, update_data, delete_data
+from helpers.validate_data import json_validate, record_exists
 from helpers.date_time import current_date
 
 app = Flask(__name__)

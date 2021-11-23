@@ -1,10 +1,9 @@
-from data.data import data_json
-
 from jsonschema import validate, exceptions
+from helpers.get_data import get_json
 
 
 def record_exists(key):
-    for item in data_json:
+    for item in get_json():
         if item['key'] == key:
             return item['value']
     return False
