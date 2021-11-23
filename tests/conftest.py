@@ -1,6 +1,6 @@
 import json
 import pytest
-from tests.test_data.request_data import host, path_dictionary_key, valid_dict
+from tests.test_data.request_data import host, path_dictionary, path_dictionary_key, valid_dict, generate_item
 import requests
 
 
@@ -14,4 +14,5 @@ def get_json_schema():
 def delete_item():
     key_to_delete = valid_dict['key']
     requests.delete(host + path_dictionary_key.format(key=key_to_delete))
-    return key_to_delete
+    yield key_to_delete
+    requests.post(host + path_dictionary, json=generate_item(key_to_delete))
