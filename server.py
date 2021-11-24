@@ -19,12 +19,12 @@ def dictionary():
         if not json_validate(body):
             return error_response(ResponseBody.BODY_FORMAT_INVALID, ResponseStatus.BAD_REQUEST)
         elif record_exists(body['key']) != False:
-            return make_response(f"Record with key '{body['key']}' already exists", 409)
+            return error_response(ResponseBody.RECORD_EXISTS.format(key=body['key']),
+                                  ResponseStatus.CONFLICT)
         else:
             append_data(body)
             return default_response(body['value'])
 
-#TODO убрать копипасту в респонсах
 
 @app.route("/dictionary/<key>", methods=['GET', 'PUT', 'DELETE'])
 def dictionary_key(key):
@@ -43,7 +43,7 @@ def dictionary_key(key):
             update_data(body['key'], body['value'])
             return default_response(body['value'])
         else:
-            return make_response(f"Record with key '{body['key']}' not found", 404)
+            return error_response(ResponseBody.RECORD_NOT_FOUND.format(key=body['key']), ResponseStatus.NOT_FOUND)
 
     elif request.method == 'DELETE':
         return_value = record_exists(key)
