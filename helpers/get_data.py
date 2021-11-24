@@ -2,7 +2,6 @@ import json
 
 
 def get_json(path="data/data_json.json"):
-    print(path)
     with open(path) as f:
         return json.load(f)
 
