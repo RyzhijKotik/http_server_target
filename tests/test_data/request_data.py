@@ -14,6 +14,8 @@ class RequestData:
     def generate_item(key):
         return {"key": key, "value": f"value for key {key}"}
 
+    empty_value = {"key": "100500", "value": ""}
+
 
 class InvalidRequestData:
     invalid_dicts = [None,
