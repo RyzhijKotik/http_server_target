@@ -36,7 +36,7 @@ def dictionary_key(key):
     elif request.method == 'PUT':
         body = request.json
         if not json_validate(body):
-            return make_response(f"body format is invalid", 400)
+            return make_response("body format is invalid", 400)
         elif record_exists(body['key']) != False:
             update_data(body['key'], body['value'])
             return make_response({"result": body['value'], "time": current_date()})
