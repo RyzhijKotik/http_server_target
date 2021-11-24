@@ -4,6 +4,7 @@ from jsonschema import validate
 from helpers.constants import ResponseStatus, ResponseBody, path_to_json_schemas
 from helpers.get_data import get_json
 from tests.test_data.request_data import URL, RequestData
+from tests.test_checks.checks import check_date_format
 
 
 def test_get_dictionary():
@@ -15,6 +16,7 @@ def test_get_dictionary():
     response_body = response.json()
     validate(response_body, get_json(path=f"{path_to_json_schemas}default_schema.json"))
     assert response_body["result"] == request_dict['value']
+    check_date_format(response_body["time"])
 
 
 def test_with_invalid_key(key_not_existing):

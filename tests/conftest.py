@@ -2,7 +2,6 @@ import pytest
 from tests.test_data.request_data import URL, RequestData
 import requests
 
-
 @pytest.fixture()
 def key_to_delete():
     key = RequestData.valid_dict['key']
