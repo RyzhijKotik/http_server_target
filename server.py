@@ -38,12 +38,14 @@ def dictionary_key(key):
     elif request.method == 'PUT':
         body = request.json
         if not json_validate(body):
-            return make_response("body format is invalid", 400)
+            return error_response(ResponseBody.BODY_FORMAT_INVALID,
+                                  ResponseStatus.BAD_REQUEST)
         elif record_exists(body['key']) != False:
             update_data(body['key'], body['value'])
             return default_response(body['value'])
         else:
-            return error_response(ResponseBody.RECORD_NOT_FOUND.format(key=body['key']), ResponseStatus.NOT_FOUND)
+            return error_response(ResponseBody.RECORD_NOT_FOUND.format(key=body['key']),
+                                  ResponseStatus.NOT_FOUND)
 
     elif request.method == 'DELETE':
         return_value = record_exists(key)
