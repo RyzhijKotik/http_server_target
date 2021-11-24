@@ -17,7 +17,7 @@ def dictionary():
         body = request.json
         if not json_validate(body):
             return make_response("body format is invalid", 400)
-        elif record_exists(body['key']):
+        elif record_exists(body['key']) != False:
             return make_response(f"Record with key '{body['key']}' already exists", 409)
         else:
             append_data(body)
@@ -28,7 +28,7 @@ def dictionary():
 def dictionary_key(key):
     if request.method == 'GET':
         return_value = record_exists(key)
-        if return_value:
+        if return_value != False:
             return make_response({"result": return_value, "time": current_date()}, 200)
         else:
             return make_response("Value not found :(", 404)
@@ -37,7 +37,7 @@ def dictionary_key(key):
         body = request.json
         if not json_validate(body):
             return make_response(f"body format is invalid", 400)
-        elif record_exists(body['key']):
+        elif record_exists(body['key']) != False:
             update_data(body['key'], body['value'])
             return make_response({"result": body['value'], "time": current_date()})
         else:
@@ -45,7 +45,7 @@ def dictionary_key(key):
 
     elif request.method == 'DELETE':
         return_value = record_exists(key)
-        if return_value:
+        if return_value != False:
             delete_data(key)
             return make_response({"result": None, "time": current_date()}, 200)
         else:

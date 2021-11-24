@@ -11,4 +11,5 @@ class ResponseBody:
     BODY_FORMAT_INVALID = "body format is invalid"
     RECORD_NOT_FOUND = "Record with key '{key}' not found"
 
+
 path_to_json_schemas = "tests/json_schemas/"
