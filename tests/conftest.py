@@ -2,6 +2,7 @@ import pytest
 from tests.test_data.request_data import URL, RequestData
 import requests
 
+
 @pytest.fixture()
 def key_to_delete():
     key = RequestData.valid_dict['key']
@@ -19,3 +20,9 @@ def key_not_existing():
                   json=RequestData.generate_item(key))
 
 
+@pytest.fixture()
+def dict_to_update():
+    old_dict = RequestData.valid_dict
+    yield old_dict
+    requests.put(URL.host + URL.path_dictionary_key.format(key=old_dict["key"]),
+                            json=old_dict)
