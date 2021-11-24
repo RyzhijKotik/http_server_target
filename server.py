@@ -1,7 +1,8 @@
 from flask import Flask, request, make_response
 from helpers.modify_data import append_data, update_data, delete_data
 from helpers.validate_data import json_validate, record_exists
-from helpers.date_time import current_date
+from helpers.build_response import default_response, error_response
+from helpers.constants import ResponseBody, ResponseStatus
 
 app = Flask(__name__)
 
@@ -21,15 +22,16 @@ def dictionary():
             return make_response(f"Record with key '{body['key']}' already exists", 409)
         else:
             append_data(body)
-            return make_response({"result": body['value'], "time": current_date()})
+            return default_response(body['value'])
 
+#TODO убрать копипасту в респонсах
 
 @app.route("/dictionary/<key>", methods=['GET', 'PUT', 'DELETE'])
 def dictionary_key(key):
     if request.method == 'GET':
         return_value = record_exists(key)
         if return_value != False:
-            return make_response({"result": return_value, "time": current_date()}, 200)
+            return default_response(return_value)
         else:
             return make_response("Value not found :(", 404)
 
@@ -39,7 +41,7 @@ def dictionary_key(key):
             return make_response("body format is invalid", 400)
         elif record_exists(body['key']) != False:
             update_data(body['key'], body['value'])
-            return make_response({"result": body['value'], "time": current_date()})
+            return default_response(body['value'])
         else:
             return make_response(f"Record with key '{body['key']}' not found", 404)
 
@@ -47,9 +49,7 @@ def dictionary_key(key):
         return_value = record_exists(key)
         if return_value != False:
             delete_data(key)
-            return make_response({"result": None, "time": current_date()}, 200)
-        else:
-            return make_response({"result": None, "time": current_date()}, 200)
+        return default_response(None)
 
 
 if __name__ == "__main__":

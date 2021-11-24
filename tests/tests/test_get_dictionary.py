@@ -1,8 +1,9 @@
 import requests
-from tests.test_data.request_data import URL, RequestData
-from helpers.get_data import get_json
 from jsonschema import validate
-from tests.test_checks.constants import ResponseStatus, ResponseBody, path_to_json_schemas
+
+from helpers.constants import ResponseStatus, ResponseBody, path_to_json_schemas
+from helpers.get_data import get_json
+from tests.test_data.request_data import URL, RequestData
 
 
 def test_get_dictionary():

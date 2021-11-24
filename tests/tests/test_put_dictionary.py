@@ -1,10 +1,12 @@
-import requests
-import pytest
-from tests.test_data.request_data import URL, RequestData, InvalidRequestData
-from helpers.get_data import get_json
-from jsonschema import validate
-from tests.test_checks.constants import ResponseStatus, ResponseBody, path_to_json_schemas
 from copy import deepcopy
+
+import pytest
+import requests
+from jsonschema import validate
+
+from helpers.constants import ResponseStatus, ResponseBody, path_to_json_schemas
+from helpers.get_data import get_json
+from tests.test_data.request_data import URL, RequestData, InvalidRequestData
 
 
 def test_put_dictionary():

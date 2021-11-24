@@ -1,9 +1,10 @@
-import requests
 import pytest
+import requests
 from jsonschema import validate
+
+from helpers.constants import ResponseStatus, path_to_json_schemas
 from helpers.get_data import get_json
 from tests.test_data.request_data import URL, InvalidRequestData
-from tests.test_checks.constants import ResponseStatus, path_to_json_schemas
 
 
 def test_delete_dictionary(key_to_delete):

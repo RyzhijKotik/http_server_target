@@ -1,9 +1,10 @@
-import requests
 import pytest
-from tests.test_data.request_data import URL, RequestData, InvalidRequestData
-from helpers.get_data import get_json
+import requests
 from jsonschema import validate
-from tests.test_checks.constants import ResponseStatus, ResponseBody, path_to_json_schemas
+
+from helpers.constants import ResponseStatus, ResponseBody, path_to_json_schemas
+from helpers.get_data import get_json
+from tests.test_data.request_data import URL, RequestData, InvalidRequestData
 
 
 def test_post_dictionary(key_not_existing):
