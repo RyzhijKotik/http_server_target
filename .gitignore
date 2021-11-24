@@ -130,3 +130,6 @@ dmypy.json
 
 # IDE
 .idea
+
+# test data
+data/data_json.json
