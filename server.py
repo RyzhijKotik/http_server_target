@@ -17,7 +17,7 @@ def dictionary():
     if request.method == 'POST':
         body = request.json
         if not json_validate(body):
-            return make_response("body format is invalid", 400)
+            return error_response(ResponseBody.BODY_FORMAT_INVALID, ResponseStatus.BAD_REQUEST)
         elif record_exists(body['key']) != False:
             return make_response(f"Record with key '{body['key']}' already exists", 409)
         else:
@@ -33,7 +33,7 @@ def dictionary_key(key):
         if return_value != False:
             return default_response(return_value)
         else:
-            return make_response("Value not found :(", 404)
+            return error_response(ResponseBody.VALUE_NOT_FOUND, ResponseStatus.NOT_FOUND)
 
     elif request.method == 'PUT':
         body = request.json

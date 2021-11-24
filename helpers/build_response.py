@@ -7,7 +7,7 @@ def current_date():
 
 
 def default_response(value):
-        return make_response({"result": value, "time": current_date()})
+    return make_response({"result": value, "time": current_date()})
 
 
 def error_response(message, code):
