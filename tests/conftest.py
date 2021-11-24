@@ -1,5 +1,5 @@
 import pytest
-from tests.test_data.request_data import URL, RequestData, InvalidRequestData
+from tests.test_data.request_data import URL, RequestData
 import requests
 
 

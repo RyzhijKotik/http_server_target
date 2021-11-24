@@ -1,7 +1,7 @@
 from jsonschema import validate, exceptions
 from helpers.get_data import get_json
 
-path_to_data = "../data/"
+path_to_data = "data/"
 
 
 def record_exists(key):

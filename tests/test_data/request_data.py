@@ -8,8 +8,7 @@ class URL:
 
 
 class RequestData:
-    path_to_data = "data/data_json.json"
-    valid_dict = get_json(path=path_to_data)[0]
+    valid_dict = get_json()[0]
 
     @staticmethod
     def generate_item(key):
